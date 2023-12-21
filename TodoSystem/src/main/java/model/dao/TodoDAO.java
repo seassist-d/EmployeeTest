@@ -64,4 +64,19 @@ public class TodoDAO {
 		}
 		return count;
 	}
+
+	public int deleteTodo(int id) throws ClassNotFoundException, SQLException {
+		int count = 0;
+
+		String sql = "DELETE FROM todo WHERE todo_id = ?";
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			pstmt.setInt(1, id);
+
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
 }
